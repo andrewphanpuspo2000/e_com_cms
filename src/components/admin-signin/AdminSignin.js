@@ -3,8 +3,10 @@ import { CustomInput } from "../user-input/CustomInput";
 import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { loginAction } from "../admin-signup/adminAction";
+import { useDispatch } from "react-redux";
 
 export const AdminSignin = () => {
+  const dispatch = useDispatch();
   const inputs = [
     {
       fieldName: "Email",
@@ -32,7 +34,7 @@ export const AdminSignin = () => {
 
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    loginAction(form);
+    dispatch(loginAction(form));
   };
 
   useEffect(() => {

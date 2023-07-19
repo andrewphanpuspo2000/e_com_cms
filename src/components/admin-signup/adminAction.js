@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { loginAxios, pushUserAxios } from "../../helper/axios";
+import { setUser } from "../admin-signin/adminSlice";
 
 export const addUserAction = async (user) => {
   const { status, message } = await pushUserAxios(user);
@@ -10,7 +11,11 @@ export const addUserAction = async (user) => {
   }
 };
 
-export const loginAction = async (info) => {
-  const { status, message } = await loginAxios(info);
+export const loginAction = (info) => async (dispatch) => {
+  const { status, message, user } = await loginAxios(info);
   toast[status](message);
+
+  if (status === "success") {
+    dispatch(setUser(user));
+  }
 };
