@@ -29,11 +29,19 @@ export const AdminSignUp = () => {
       name: "email",
     },
     {
+      fieldName: "Address",
+      type: "text",
+      placeholder: "Input address ",
+      required: true,
+      name: "address",
+    },
+    {
       fieldName: " Password",
       type: "password",
       placeholder: "Input password ",
       required: true,
       name: "password",
+      minLength: "6",
     },
     {
       fieldName: " Confirm Password",
