@@ -37,3 +37,12 @@ export const loginAxios = async (user) => {
   const { data } = await axios.get(userAPI, { params: user });
   return data;
 };
+
+export const activateAcc = async (obj) => {
+  const data = {
+    method: "patch",
+    url: userAPI + "/verify",
+    obj: obj,
+  };
+  return await axiosProcessor(data);
+};
