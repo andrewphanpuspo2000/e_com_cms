@@ -1,8 +1,8 @@
 import { Button } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { verifyUser } from "../../components/admin-signup/adminAction";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { Header } from "../../components/layout/Header";
 
@@ -12,15 +12,17 @@ export const Verification = () => {
   const getE = searchParam.get("e");
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const { user } = useSelector((state) => state.userData);
+
   const [showSpinner, setShowSpinner] = useState(false);
 
   const handleClick = async (e) => {
     e.preventDefault();
     setShowSpinner(true);
     const result = await dispatch(verifyUser({ email: getE, code: getC }));
-    if (result.status === "success") {
+    if (result?.status === "success") {
       navigate("/");
+    } else {
+      setShowSpinner(false);
     }
   };
   return (
