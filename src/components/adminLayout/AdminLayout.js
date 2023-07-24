@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap";
 import { Footer } from "../layout/Footer";
 import { Header } from "../layout/Header";
 import { Sidebar } from "../side-bar/Sidebar";
@@ -10,10 +11,12 @@ export const AdminLayout = ({ children, title }) => {
       </div>
       <main className="main">
         <Header />
-        <div className="page-content">
+        <Container className="main-category  pt-4">
+          {/* // <div className="page-content pt-4"> */}
           <h2>{title}</h2>
+          <hr />
           {children}
-        </div>
+        </Container>
         <Footer />
       </main>
     </div>
