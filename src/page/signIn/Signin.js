@@ -6,7 +6,12 @@ export const Signin = () => {
   return (
     <div>
       <Header />
-      <main className="main p-5 d-flex justify-content-center">
+      <main className="main p-5 d-flex justify-content-center align-items-center gap-5">
+        <div className="welcome-signin">
+          <h1>
+            Welcome to <br /> BROS
+          </h1>
+        </div>
         <AdminSignin />
       </main>
       <Footer />

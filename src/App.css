@@ -24,3 +24,18 @@
 .side-bar-list > li {
   padding: 1rem 0;
 }
+
+.welcome-signin {
+  animation: welcomeFadeIn 1s ease-in;
+}
+
+@keyframes welcomeFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-300px);
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

@@ -43,7 +43,7 @@ export const AdminSignin = () => {
   return (
     <>
       <Form
-        className="p-5 shadow-lg d-flex flex-column"
+        className="p-5 shadow-lg d-flex flex-column signin-form"
         style={{ width: "400px" }}
         onSubmit={handleOnSubmit}
       >
