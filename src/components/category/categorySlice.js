@@ -8,6 +8,7 @@ const categorySlice = createSlice({
   initialState,
   reducers: {
     setCategory: (state, { payload }) => {
+      if (state.category.length === 0 && payload.length === 0) return;
       state.category = payload;
     },
   },

@@ -48,10 +48,11 @@ export const AdminSignin = () => {
         onSubmit={handleOnSubmit}
       >
         <h2>Admin Login</h2>
+        <hr />
         {inputs.map((item, i) => (
           <CustomInput key={i} handleOnChange={handleOnChange} {...item} />
         ))}
-        <Link>
+        <Link to="reset-pass-otp">
           <p>Forget password</p>
         </Link>
         <Button className="align-self-end" type="submit">

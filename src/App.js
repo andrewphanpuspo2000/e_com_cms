@@ -14,8 +14,16 @@ import { Payment } from "./page/payment/Payment";
 import { Order } from "./page/order/Order";
 import { Customer } from "./page/customer/Customer";
 import { Profile } from "./page/profile/Profile";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
+
+import { getAllCategoriesAction } from "./components/category/categoryAction";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getAllCategoriesAction());
+  }, [dispatch]);
   return (
     <div className="">
       <Routes>

@@ -64,3 +64,12 @@ export const getAllCategoriesAxios = async () => {
 
   return await axiosProcessor(obj);
 };
+export const updateCatAxios = async (item) => {
+  const obj = {
+    method: "put",
+    url: categoryAPI,
+    obj: item,
+  };
+
+  return await axiosProcessor(obj);
+};
