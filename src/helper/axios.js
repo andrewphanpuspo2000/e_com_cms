@@ -78,6 +78,7 @@ export const updateCatAxios = async (item) => {
     method: "put",
     url: categoryAPI,
     obj: item,
+    isPrivate: true,
   };
 
   return await axiosProcessor(obj);

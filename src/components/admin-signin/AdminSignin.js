@@ -1,6 +1,6 @@
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../user-input/CustomInput";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { autoLogin, loginAction } from "../admin-signup/adminAction";
 import { useDispatch, useSelector } from "react-redux";
@@ -23,7 +23,7 @@ export const AdminSignin = () => {
       required: true,
     },
   ];
-
+  const location = useLocation();
   const [form, setForm] = useState({});
   const { user } = useSelector((state) => state.userData);
   const navigate = useNavigate();
@@ -37,7 +37,7 @@ export const AdminSignin = () => {
     e.preventDefault();
     dispatch(loginAction(form));
   };
-
+  // const pathTo= location.
   useEffect(() => {
     user?._id && navigate("/dashboard");
     dispatch(autoLogin());

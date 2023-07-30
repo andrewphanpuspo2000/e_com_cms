@@ -46,7 +46,7 @@ export const verifyUser = (obj) => async (dispatch) => {
 export const getUserInfo = () => async (dispatch) => {
   const { status, message, user } = await getUserInfoAxios();
   console.log("this is user info", user);
-  toast[status](message);
+  // toast[status](message);
   if (status === "success") {
     dispatch(setUser(user));
   }
