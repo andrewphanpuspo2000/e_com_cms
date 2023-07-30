@@ -3,17 +3,15 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 
 import { Link } from "react-router-dom";
-import { persistor } from "../../store";
+
 import { useDispatch } from "react-redux";
-import { setUser } from "../admin-signin/adminSlice";
 
 export const Header = () => {
   const dispatch = useDispatch();
   const signOut = () => {
-    persistor.purge().then(() => {
-      console.log("log out");
-    });
-    dispatch(setUser({}));
+    //log out from server by removing the access and refresh JWTs
+    //clear storage
+    //reset store
   };
   return (
     <div>

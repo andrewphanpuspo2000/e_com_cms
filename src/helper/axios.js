@@ -3,12 +3,20 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const userAPI = rootAPI + "/api/v1/user";
 const categoryAPI = rootAPI + "/api/v1/category";
-const axiosProcessor = async ({ method, url, obj }) => {
+const getAccessJWT = () => {
+  return sessionStorage.getItem("accessJWT");
+};
+
+const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
   try {
+    const headers = {
+      Authorization: isPrivate ? getAccessJWT() : null,
+    };
     const { data } = await axios({
       method,
       url,
       data: obj,
+      headers,
     });
     return data;
   } catch (error) {
@@ -60,6 +68,7 @@ export const getAllCategoriesAxios = async () => {
   const obj = {
     method: "get",
     url: categoryAPI,
+    isPrivate: true,
   };
 
   return await axiosProcessor(obj);
@@ -69,6 +78,15 @@ export const updateCatAxios = async (item) => {
     method: "put",
     url: categoryAPI,
     obj: item,
+  };
+
+  return await axiosProcessor(obj);
+};
+export const getUserInfoAxios = async () => {
+  const obj = {
+    method: "get",
+    url: userAPI + "/getUser",
+    isPrivate: true,
   };
 
   return await axiosProcessor(obj);

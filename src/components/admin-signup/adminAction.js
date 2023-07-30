@@ -1,5 +1,10 @@
 import { toast } from "react-toastify";
-import { activateAcc, loginAxios, postNewAdmin } from "../../helper/axios";
+import {
+  activateAcc,
+  getUserInfoAxios,
+  loginAxios,
+  postNewAdmin,
+} from "../../helper/axios";
 import { setUser } from "../admin-signin/adminSlice";
 
 export const addUserAction = async (user) => {
@@ -18,7 +23,10 @@ export const loginAction = (info) => async (dispatch) => {
   if (status === "success") {
     localStorage.setItem("refreshJWT", token.refreshJWT);
     sessionStorage.setItem("accessJWT", token.accessJWT);
+    dispatch(getUserInfo());
   }
+
+  //get the user data and mount it
 };
 
 export const verifyUser = (obj) => async (dispatch) => {
@@ -33,4 +41,19 @@ export const verifyUser = (obj) => async (dispatch) => {
     dispatch(setUser(result?.user));
     return result;
   }
+};
+
+export const getUserInfo = () => async (dispatch) => {
+  const { status, message, user } = await getUserInfoAxios();
+  console.log("this is user info", user);
+  toast[status](message);
+  if (status === "success") {
+    dispatch(setUser(user));
+  }
+};
+
+export const autoLogin = () => (dispatch) => {
+  const accessJWT = sessionStorage.getItem("accessJWT");
+
+  if (accessJWT) dispatch(getUserInfo());
 };

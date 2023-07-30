@@ -18,12 +18,11 @@ import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import { getAllCategoriesAction } from "./components/category/categoryAction";
+import PrivateRouter from "./components/private/PrivateRouter";
 
 function App() {
   const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(getAllCategoriesAction());
-  }, [dispatch]);
+
   return (
     <div className="">
       <Routes>
@@ -32,14 +31,70 @@ function App() {
         <Route path="/admin-verification" element={<Verification />} />
 
         {/* private router */}
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/category" element={<Category />} />
-        <Route path="/product" element={<Product />} />
-        <Route path="/payment-option" element={<Payment />} />
-        <Route path="/order" element={<Order />} />
-        <Route path="/add-admin" element={<Dashboard />} />
-        <Route path="/customer" element={<Customer />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route
+          path="/dashboard"
+          element={
+            <PrivateRouter>
+              <Dashboard />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/category"
+          element={
+            <PrivateRouter>
+              <Category />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <PrivateRouter>
+              <Product />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/payment-option"
+          element={
+            <PrivateRouter>
+              <Payment />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/order"
+          element={
+            <PrivateRouter>
+              <Order />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/add-admin"
+          element={
+            <PrivateRouter>
+              <Dashboard />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/customer"
+          element={
+            <PrivateRouter>
+              <Customer />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <PrivateRouter>
+              <Profile />
+            </PrivateRouter>
+          }
+        />
       </Routes>
       <ToastContainer />
     </div>

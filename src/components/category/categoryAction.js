@@ -25,7 +25,7 @@ export const updateCat = (item) => async (dispatch) => {
 export const getAllCategoriesAction = () => async (dispatch) => {
   const { status, message, result } = await getAllCategoriesAxios();
 
-  toast[status](message);
+  // toast[status](message);
   if (status === "success") {
     dispatch(setCategory(result));
   }

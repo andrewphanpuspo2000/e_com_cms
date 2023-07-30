@@ -26,12 +26,6 @@ export const Category = () => {
   const dispatch = useDispatch();
   const [selectedTable, setSelectedTable] = useState({});
 
-  const handleOnAddCat = () => {
-    // const { value } = nameRef.current;
-    // console.log(value);
-    // nameRef.current.value = "test";
-  };
-
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
@@ -46,7 +40,9 @@ export const Category = () => {
     dispatch(setSystem(true));
     setSelectedTable(obj);
   };
-
+  useEffect(() => {
+    dispatch(getAllCategoriesAction());
+  }, [dispatch]);
   return (
     <AdminLayout title="Category">
       <Container>

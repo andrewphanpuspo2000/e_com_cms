@@ -1,9 +1,9 @@
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../user-input/CustomInput";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { loginAction } from "../admin-signup/adminAction";
-import { useDispatch } from "react-redux";
+import { autoLogin, loginAction } from "../admin-signup/adminAction";
+import { useDispatch, useSelector } from "react-redux";
 
 export const AdminSignin = () => {
   const dispatch = useDispatch();
@@ -25,7 +25,8 @@ export const AdminSignin = () => {
   ];
 
   const [form, setForm] = useState({});
-
+  const { user } = useSelector((state) => state.userData);
+  const navigate = useNavigate();
   const handleOnChange = (e) => {
     const { name, value } = e.target;
 
@@ -38,8 +39,9 @@ export const AdminSignin = () => {
   };
 
   useEffect(() => {
-    console.log(form);
-  }, [form]);
+    user?._id && navigate("/dashboard");
+    dispatch(autoLogin());
+  }, [user, navigate, dispatch]);
   return (
     <>
       <Form
