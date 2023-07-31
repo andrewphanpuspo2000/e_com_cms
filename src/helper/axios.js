@@ -6,11 +6,21 @@ const categoryAPI = rootAPI + "/api/v1/category";
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
 };
+const getRefreshJWT = () => {
+  return localStorage.getItem("refreshJWT");
+};
 
-const axiosProcessor = async ({ method, url, obj, isPrivate }) => {
+const axiosProcessor = async ({
+  method,
+  url,
+  obj,
+  isPrivate,
+  refreshToken,
+}) => {
   try {
+    const token = refreshToken ? getRefreshJWT() : getAccessJWT();
     const headers = {
-      Authorization: isPrivate ? getAccessJWT() : null,
+      Authorization: isPrivate ? token : null,
     };
     const { data } = await axios({
       method,
@@ -90,5 +100,15 @@ export const getUserInfoAxios = async () => {
     isPrivate: true,
   };
 
+  return await axiosProcessor(obj);
+};
+
+export const newRefresherAxios = async () => {
+  const obj = {
+    method: "get",
+    url: userAPI + "/get-accessJWT",
+    isPrivate: true,
+    refreshToken: true,
+  };
   return await axiosProcessor(obj);
 };

@@ -24,6 +24,7 @@ export const AdminSignin = () => {
     },
   ];
   const location = useLocation();
+  console.log(location);
   const [form, setForm] = useState({});
   const { user } = useSelector((state) => state.userData);
   const navigate = useNavigate();
@@ -37,11 +38,12 @@ export const AdminSignin = () => {
     e.preventDefault();
     dispatch(loginAction(form));
   };
-  // const pathTo= location.
+  const pathTo = location.state?.from?.location?.pathname || "/dashboard";
   useEffect(() => {
-    user?._id && navigate("/dashboard");
+    user?._id && navigate(pathTo);
+    console.log(pathTo);
     dispatch(autoLogin());
-  }, [user, navigate, dispatch]);
+  }, [user, navigate, dispatch, pathTo]);
   return (
     <>
       <Form

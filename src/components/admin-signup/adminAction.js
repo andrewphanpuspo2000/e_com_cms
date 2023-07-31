@@ -3,6 +3,7 @@ import {
   activateAcc,
   getUserInfoAxios,
   loginAxios,
+  newRefresherAxios,
   postNewAdmin,
 } from "../../helper/axios";
 import { setUser } from "../admin-signin/adminSlice";
@@ -52,8 +53,19 @@ export const getUserInfo = () => async (dispatch) => {
   }
 };
 
-export const autoLogin = () => (dispatch) => {
+export const autoLogin = () => async (dispatch) => {
   const accessJWT = sessionStorage.getItem("accessJWT");
 
-  if (accessJWT) dispatch(getUserInfo());
+  if (accessJWT) return dispatch(getUserInfo());
+
+  const refreshJWT = localStorage.getItem("refreshJWT");
+
+  if (refreshJWT) {
+    const { accessJWT } = await newRefresherAxios();
+    console.log(accessJWT);
+    if (accessJWT) {
+      sessionStorage.setItem("accessJWT", accessJWT);
+      dispatch(getUserInfo());
+    }
+  }
 };
