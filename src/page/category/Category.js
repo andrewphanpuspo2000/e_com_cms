@@ -29,7 +29,6 @@ export const Category = () => {
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
-    // console.log(form);
   };
 
   const handleOnSubmit = (e) => {

@@ -112,3 +112,16 @@ export const newRefresherAxios = async () => {
   };
   return await axiosProcessor(obj);
 };
+
+export const logOutAxios = async (_id) => {
+  const obj = {
+    method: "post",
+    url: userAPI + "/admin-logout",
+    obj: {
+      _id: _id,
+      accessJWT: getAccessJWT(),
+      refreshJWT: getRefreshJWT(),
+    },
+  };
+  return await axiosProcessor(obj);
+};

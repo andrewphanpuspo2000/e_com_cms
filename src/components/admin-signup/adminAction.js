@@ -46,7 +46,6 @@ export const verifyUser = (obj) => async (dispatch) => {
 
 export const getUserInfo = () => async (dispatch) => {
   const { status, message, user } = await getUserInfoAxios();
-  console.log("this is user info", user);
   // toast[status](message);
   if (status === "success") {
     dispatch(setUser(user));
@@ -62,7 +61,6 @@ export const autoLogin = () => async (dispatch) => {
 
   if (refreshJWT) {
     const { accessJWT } = await newRefresherAxios();
-    console.log(accessJWT);
     if (accessJWT) {
       sessionStorage.setItem("accessJWT", accessJWT);
       dispatch(getUserInfo());

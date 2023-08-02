@@ -55,7 +55,6 @@ export const AdminSignUp = () => {
     const { name, value } = e.target;
 
     setForm({ ...form, [name]: value });
-    console.log(form);
   };
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -65,8 +64,6 @@ export const AdminSignUp = () => {
     } else {
       toast.error("Confirm password is wrong");
     }
-
-    console.log(form);
   };
   return (
     <div>
