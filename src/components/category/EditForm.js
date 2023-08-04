@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Button, Row, Col, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
-import { updateCat } from "./categoryAction";
+import { deleteCat, updateCat } from "./categoryAction";
+import { setSystem } from "../modal/modalSlice";
 
 const EditForm = ({ cats }) => {
   const dispatch = useDispatch();
@@ -10,6 +11,7 @@ const EditForm = ({ cats }) => {
     e.preventDefault();
 
     const res = dispatch(updateCat(form));
+    dispatch(setSystem(false));
   };
   useEffect(() => {
     setForm(cats);
@@ -22,12 +24,16 @@ const EditForm = ({ cats }) => {
       status: checked ? "active" : "inactive",
     });
   };
-
+  const handleOnDelete = () => {
+    dispatch(deleteCat(cats?._id));
+    dispatch(setSystem(false));
+  };
   return (
     <div>
       <Form className="p-3  shadow-lg" onSubmit={handleOnSubmit}>
         <Row>
           <Col>
+            <Form.Label>Status</Form.Label>
             <Form.Check
               type="switch"
               title="status"
@@ -38,6 +44,7 @@ const EditForm = ({ cats }) => {
         </Row>
         <Row>
           <Col>
+            <Form.Label>Title</Form.Label>
             <Form.Control
               name="title"
               value={form.title}
@@ -46,15 +53,15 @@ const EditForm = ({ cats }) => {
           </Col>
         </Row>
         <Row>
-          <Col>
+          <Col className="mt-3">
             <Button type="submit" className="w-100">
               Update Category
             </Button>
           </Col>
         </Row>
         <Row>
-          <Col>
-            <Button className="w-100" variant="danger">
+          <Col className="mt-3">
+            <Button className="w-100" variant="danger" onClick={handleOnDelete}>
               Delete
             </Button>
           </Col>

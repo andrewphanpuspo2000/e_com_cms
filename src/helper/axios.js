@@ -125,3 +125,12 @@ export const logOutAxios = async (_id) => {
   };
   return await axiosProcessor(obj);
 };
+
+export const deleteCatAxios = async (id) => {
+  const obj = {
+    method: "delete",
+    url: categoryAPI + "/" + id,
+    isPrivate: true,
+  };
+  return await axiosProcessor(obj);
+};

@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import {
+  deleteCatAxios,
   getAllCategoriesAxios,
   pushCatalogAxios,
   updateCatAxios,
@@ -28,5 +29,13 @@ export const getAllCategoriesAction = () => async (dispatch) => {
   // toast[status](message);
   if (status === "success") {
     dispatch(setCategory(result));
+  }
+};
+
+export const deleteCat = (id) => async (dispatch) => {
+  const { status, message } = await deleteCatAxios(id);
+  toast[status](message);
+  if (status === "success") {
+    dispatch(getAllCategoriesAction());
   }
 };
