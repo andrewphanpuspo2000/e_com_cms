@@ -3,6 +3,8 @@ import axios from "axios";
 const rootAPI = process.env.REACT_APP_ROOTAPI;
 const userAPI = rootAPI + "/api/v1/user";
 const categoryAPI = rootAPI + "/api/v1/category";
+const paymentAPI = rootAPI + "/api/v1/payment";
+
 const getAccessJWT = () => {
   return sessionStorage.getItem("accessJWT");
 };
@@ -133,4 +135,44 @@ export const deleteCatAxios = async (id) => {
     isPrivate: true,
   };
   return await axiosProcessor(obj);
+};
+
+export const addPaymentMethodAxios = async (data) => {
+  const obj = {
+    method: "post",
+    url: paymentAPI,
+    obj: data,
+    isPrivate: true,
+  };
+  return await axiosProcessor(obj);
+};
+
+export const getOptionPaymentsAxios = () => {
+  const obj = {
+    method: "get",
+    url: paymentAPI,
+    isPrivate: true,
+  };
+
+  return axiosProcessor(obj);
+};
+export const updateOptionPaymentsAxios = (data) => {
+  const obj = {
+    method: "put",
+    url: paymentAPI,
+    isPrivate: true,
+    obj: data,
+  };
+
+  return axiosProcessor(obj);
+};
+export const deleteOptionPaymentAxios = (id) => {
+  console.log(id);
+  const obj = {
+    method: "delete",
+    url: paymentAPI + `/${id}`,
+    isPrivate: true,
+  };
+
+  return axiosProcessor(obj);
 };
