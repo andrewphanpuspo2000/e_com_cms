@@ -60,7 +60,7 @@ export const autoLogin = () => async (dispatch) => {
   const refreshJWT = localStorage.getItem("refreshJWT");
 
   if (refreshJWT) {
-    const { accessJWT } = await newRefresherAxios();
+    const { accessJWT } = await newRefresherAxios(); // new refresh action is for getting new accessJWT from jwt.js
     if (accessJWT) {
       sessionStorage.setItem("accessJWT", accessJWT);
       dispatch(getUserInfo());

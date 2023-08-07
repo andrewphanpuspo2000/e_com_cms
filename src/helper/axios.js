@@ -32,9 +32,27 @@ const axiosProcessor = async ({
     });
     return data;
   } catch (error) {
+    if (
+      error.statusCode === 403 &&
+      error?.response?.data?.message === "jwt expired"
+    ) {
+      const { status, accessJWT } = await newRefresherAxios();
+      console.log(error);
+      if (status === "success" && accessJWT) {
+        sessionStorage.setItem("accessJWT", accessJWT);
+      }
+
+      return axiosProcessor({
+        method,
+        url,
+        obj,
+        isPrivate,
+        refreshToken,
+      });
+    }
     return {
       status: "error",
-      message: error.message,
+      message: error?.response?.data?.message,
     };
   }
 };
@@ -104,7 +122,7 @@ export const getUserInfoAxios = async () => {
 
   return await axiosProcessor(obj);
 };
-
+// new refresh function is for getting new accessJWT from jwt.js through user router API
 export const newRefresherAxios = async () => {
   const obj = {
     method: "get",
