@@ -41,7 +41,7 @@ export const AdminSignin = () => {
   const pathTo = location.state?.from?.location?.pathname || "/dashboard";
   useEffect(() => {
     user?._id && navigate(pathTo);
-
+    console.log(location);
     dispatch(autoLogin());
   }, [user, navigate, dispatch, pathTo]);
   return (
