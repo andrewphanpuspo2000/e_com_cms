@@ -24,7 +24,7 @@ export const Header = () => {
   };
   return (
     <div>
-      <Navbar expand="md" variant="dark" className="bg-dark">
+      <Navbar expand="md" variant="dark" className="bg-primary">
         <Container>
           <Navbar.Brand href="/">Bros</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />

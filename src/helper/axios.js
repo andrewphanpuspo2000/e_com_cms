@@ -30,14 +30,16 @@ const axiosProcessor = async ({
       data: obj,
       headers,
     });
+    console.log(data);
     return data;
   } catch (error) {
     if (
-      error.statusCode === 403 &&
+      error.request?.status === 403 &&
       error?.response?.data?.message === "jwt expired"
     ) {
       const { status, accessJWT } = await newRefresherAxios();
       console.log(error);
+      console.log(status);
       if (status === "success" && accessJWT) {
         sessionStorage.setItem("accessJWT", accessJWT);
       }
@@ -50,6 +52,7 @@ const axiosProcessor = async ({
         refreshToken,
       });
     }
+    console.log(error);
     return {
       status: "error",
       message: error?.response?.data?.message,
