@@ -89,7 +89,7 @@ const NewProduct = () => {
     }
     //check if there is any new image is being added
     if (imgs?.length) {
-      [...imgs].forEach((image) => formDt.append("image", image));
+      [...imgs].forEach((image) => formDt.append("images", image));
     }
     //append all the form data and the image together
     dispatch(addProductAction(formDt));
@@ -131,6 +131,7 @@ const NewProduct = () => {
               name="img"
               multiple
               onChange={handleOnImageAttached}
+              required={true}
             />
           </Form.Group>
           <Button type="submit">Add Product</Button>

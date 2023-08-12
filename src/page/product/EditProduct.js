@@ -3,12 +3,18 @@ import { AdminLayout } from "../../components/adminLayout/AdminLayout";
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/user-input/CustomInput";
 import { useDispatch } from "react-redux";
-import { addProductAction } from "../../components/product/productAction";
+import {
+  addProductAction,
+  getProduct,
+} from "../../components/product/productAction";
 import CategoryOption from "../../components/category/CategoryOption";
 import { getAllCategoriesAction } from "../../components/category/categoryAction";
+import { useParams } from "react-router-dom";
 
 const EditProduct = () => {
   const initialState = { status: "inActive" };
+  const [form, setForm] = useState(initialState);
+  const [imgs, setImgs] = useState([]);
   const inputs = [
     {
       name: "name",
@@ -16,6 +22,7 @@ const EditProduct = () => {
       type: "text",
       placeholder: "Samsung",
       required: true,
+      value: form.name,
     },
     {
       name: "sku",
@@ -23,6 +30,7 @@ const EditProduct = () => {
       type: "text",
       placeholder: "Samsung-TV3",
       required: true,
+      value: form.sku,
     },
     {
       name: "qty",
@@ -30,6 +38,7 @@ const EditProduct = () => {
       type: "text",
       placeholder: "50",
       required: true,
+      value: form.qty,
     },
     {
       name: "price",
@@ -37,22 +46,26 @@ const EditProduct = () => {
       type: "number",
       placeholder: "1000",
       require: true,
+      value: form.price,
     },
     {
       name: "salesPrice",
       label: "Sales Price",
       type: "number",
       placeholder: "800",
+      value: form.salesPrice,
     },
     {
       name: "salesStart",
       label: "Sales Start Date",
       type: "Date",
+      value: form.salesStart?.slice(0, 10),
     },
     {
       name: "salesEnd",
       label: "Sales End Date",
       type: "Date",
+      value: form.salesEnd?.slice(0, 10),
     },
     {
       name: "description",
@@ -64,9 +77,9 @@ const EditProduct = () => {
       require: true,
     },
   ];
-  const [form, setForm] = useState(initialState);
-  const [imgs, setImgs] = useState([]);
+
   const dispatch = useDispatch();
+  const { id } = useParams();
   const handleOnChange = (e) => {
     let { name, value, checked } = e.target;
     if (name === "status") {
@@ -89,10 +102,10 @@ const EditProduct = () => {
     }
     //check if there is any new image is being added
     if (imgs?.length) {
-      [...imgs].forEach((image) => formDt.append("image", image));
+      [...imgs].forEach((image) => formDt.append("images", image));
     }
     //append all the form data and the image together
-    dispatch(addProductAction(form));
+    dispatch(addProductAction(formDt));
   };
 
   const handleOnImageAttached = (e) => {
@@ -100,12 +113,17 @@ const EditProduct = () => {
     console.log(files);
     setImgs(files);
   };
-
+  const getProductWithId = async (id) => {
+    const product = await getProduct(id);
+    product?._id && setForm(product);
+  };
   useEffect(() => {
     dispatch(getAllCategoriesAction());
-  }, [dispatch]);
+    getProductWithId(id);
+    console.log(form);
+  }, [dispatch, id]);
   return (
-    <AdminLayout title="New Product">
+    <AdminLayout title="Edit Product">
       <div className="mb-4">
         <Form onSubmit={handleOnSubmit}>
           <Form.Group>
@@ -113,6 +131,7 @@ const EditProduct = () => {
               name="status"
               type="switch"
               label="Status"
+              checked={form.status === "active"}
               onChange={handleOnChange}
             />
           </Form.Group>
@@ -133,7 +152,7 @@ const EditProduct = () => {
               onChange={handleOnImageAttached}
             />
           </Form.Group>
-          <Button type="submit">Add Product</Button>
+          <Button type="submit">Edit Product</Button>
         </Form>
       </div>
     </AdminLayout>

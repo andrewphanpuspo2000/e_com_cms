@@ -30,7 +30,14 @@ const ProductTable = () => {
           products.map((item, i) => (
             <tr>
               <td>{i + 1}</td>
-              <td>thumbnail</td>
+              <td>
+                <img
+                  src={
+                    process.env.REACT_APP_ROOTAPI + item?.thumbnail?.slice(10)
+                  }
+                  style={{ width: "250px" }}
+                />
+              </td>
               <td>{item.name}</td>
 
               <td>{item.qty}</td>
@@ -39,7 +46,7 @@ const ProductTable = () => {
               <td>{item.salesStart.slice(0, 10)}</td>
               <td>{item.salesEnd.slice(0, 10)}</td>
               <td>
-                <Link to={`editProduct/${item._id}`}>
+                <Link to={`/editProduct/${item._id}`}>
                   <Button variant="warning">Edit</Button>
                 </Link>
               </td>

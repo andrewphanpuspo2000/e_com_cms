@@ -209,10 +209,10 @@ export const pushProductAxios = async (data) => {
 
   return await axiosProcessor(obj);
 };
-export const getAllProductsAxios = async () => {
+export const getProductsAxios = async (id) => {
   const obj = {
     method: "get",
-    url: productAPI,
+    url: !id ? productAPI : productAPI + "/" + id,
     isPrivate: true,
   };
 

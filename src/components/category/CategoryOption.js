@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 const CategoryOption = ({ handleChange }) => {
   const { category } = useSelector((state) => state.categoryData);
   return (
-    <Form.Select name="parentCat" onChange={handleChange} required>
+    <Form.Select name="parentCat" onChange={handleChange} required={true}>
       {category?.map((item, i) => (
         <option value={item._id}>{item.title}</option>
       ))}
