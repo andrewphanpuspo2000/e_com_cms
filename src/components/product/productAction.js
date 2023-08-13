@@ -3,6 +3,7 @@ import {
   deleteProductsAxios,
   getProductsAxios,
   pushProductAxios,
+  updateProductsAxios,
 } from "../../helper/axios";
 import { setProducts } from "./productSlice";
 
@@ -43,5 +44,12 @@ export const getProduct = async (id) => {
 
   if (status === "success") {
     return product;
+  }
+};
+export const updateProductAction = (data) => async (dispatch) => {
+  const { status, message } = await updateProductsAxios(data);
+  toast[status](message);
+  if (status === "success") {
+    dispatch(getAllProductsAction());
   }
 };

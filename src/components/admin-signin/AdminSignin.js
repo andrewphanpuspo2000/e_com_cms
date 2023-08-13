@@ -56,7 +56,7 @@ export const AdminSignin = () => {
         {inputs.map((item, i) => (
           <CustomInput key={i} handleOnChange={handleOnChange} {...item} />
         ))}
-        <Link to="reset-pass-otp">
+        <Link to="/password-reset">
           <p>Forget password</p>
         </Link>
         <Button className="align-self-end" type="submit">

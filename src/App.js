@@ -17,10 +17,10 @@ import { Profile } from "./page/profile/Profile";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
-import { getAllCategoriesAction } from "./components/category/categoryAction";
 import PrivateRouter from "./components/private/PrivateRouter";
 import NewProduct from "./page/product/NewProduct";
 import EditProduct from "./page/product/EditProduct";
+import ResetPassword from "./page/resetPassword/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -31,6 +31,7 @@ function App() {
         <Route path="/" element={<Signin />} />
         <Route path="/new-admin" element={<Signup />} />
         <Route path="/admin-verification" element={<Verification />} />
+        <Route path="/password-reset" element={<ResetPassword />} />
 
         {/* private router */}
         <Route

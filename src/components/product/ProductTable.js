@@ -43,8 +43,8 @@ const ProductTable = () => {
               <td>{item.qty}</td>
               <td>$ {item.price}</td>
               <td>$ {item.salesPrice}</td>
-              <td>{item.salesStart.slice(0, 10)}</td>
-              <td>{item.salesEnd.slice(0, 10)}</td>
+              <td>{item?.salesStart?.slice(0, 10)}</td>
+              <td>{item?.salesEnd?.slice(0, 10)}</td>
               <td>
                 <Link to={`/editProduct/${item._id}`}>
                   <Button variant="warning">Edit</Button>

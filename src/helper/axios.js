@@ -227,3 +227,22 @@ export const deleteProductsAxios = async (id) => {
 
   return await axiosProcessor(obj);
 };
+export const updateProductsAxios = async (data) => {
+  const obj = {
+    method: "put",
+    url: productAPI,
+    isPrivate: true,
+    obj: data,
+  };
+
+  return await axiosProcessor(obj);
+};
+export const reqOTPAxios = async (email) => {
+  const obj = {
+    method: "post",
+    url: userAPI + "/get-OTP",
+    obj: { email },
+  };
+
+  return await axiosProcessor(obj);
+};

@@ -5,6 +5,7 @@ import {
   loginAxios,
   newRefresherAxios,
   postNewAdmin,
+  reqOTPAxios,
 } from "../../helper/axios";
 import { setUser } from "../admin-signin/adminSlice";
 
@@ -66,4 +67,16 @@ export const autoLogin = () => async (dispatch) => {
       dispatch(getUserInfo());
     }
   }
+};
+
+export const reqOTPAction = async (email) => {
+  const pending = reqOTPAxios(email);
+
+  toast.promise(pending, {
+    pending: "pending...",
+  });
+
+  const { status, message } = await pending;
+  toast[status](message);
+  return status;
 };

@@ -4,17 +4,18 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/user-input/CustomInput";
 import { useDispatch } from "react-redux";
 import {
-  addProductAction,
+  getAllProductsAction,
   getProduct,
+  updateProductAction,
 } from "../../components/product/productAction";
 import CategoryOption from "../../components/category/CategoryOption";
 import { getAllCategoriesAction } from "../../components/category/categoryAction";
 import { useParams } from "react-router-dom";
 
 const EditProduct = () => {
-  const initialState = { status: "inActive" };
-  const [form, setForm] = useState(initialState);
+  const [form, setForm] = useState();
   const [imgs, setImgs] = useState([]);
+  const [selectedDelete, setSelectedDelete] = useState([]);
   const inputs = [
     {
       name: "name",
@@ -22,15 +23,14 @@ const EditProduct = () => {
       type: "text",
       placeholder: "Samsung",
       required: true,
-      value: form.name,
+      value: form?.name,
     },
     {
       name: "sku",
       label: "SKU",
       type: "text",
-      placeholder: "Samsung-TV3",
-      required: true,
-      value: form.sku,
+      placeholder: form?.sku,
+      disabled: true,
     },
     {
       name: "qty",
@@ -38,34 +38,34 @@ const EditProduct = () => {
       type: "text",
       placeholder: "50",
       required: true,
-      value: form.qty,
+      value: form?.qty,
     },
     {
       name: "price",
       label: "Price",
       type: "number",
       placeholder: "1000",
-      require: true,
-      value: form.price,
+      required: true,
+      value: form?.price,
     },
     {
       name: "salesPrice",
       label: "Sales Price",
       type: "number",
       placeholder: "800",
-      value: form.salesPrice,
+      value: form?.salesPrice,
     },
     {
       name: "salesStart",
       label: "Sales Start Date",
       type: "Date",
-      value: form.salesStart?.slice(0, 10),
+      value: form?.salesStart?.slice(0, 10),
     },
     {
       name: "salesEnd",
       label: "Sales End Date",
       type: "Date",
-      value: form.salesEnd?.slice(0, 10),
+      value: form?.salesEnd?.slice(0, 10),
     },
     {
       name: "description",
@@ -105,7 +105,11 @@ const EditProduct = () => {
       [...imgs].forEach((image) => formDt.append("images", image));
     }
     //append all the form data and the image together
-    dispatch(addProductAction(formDt));
+    dispatch(updateProductAction(formDt));
+  };
+
+  const handleSelectedDelete = (e) => {
+    const { name, value } = e.target;
   };
 
   const handleOnImageAttached = (e) => {
@@ -115,12 +119,13 @@ const EditProduct = () => {
   };
   const getProductWithId = async (id) => {
     const product = await getProduct(id);
-    product?._id && setForm(product);
+    const { slug, createdAt, updatedAt, __v, ...rest } = product;
+    product?._id && setForm(rest);
   };
   useEffect(() => {
     dispatch(getAllCategoriesAction());
     getProductWithId(id);
-    console.log(form);
+    // console.log(form);
   }, [dispatch, id]);
   return (
     <AdminLayout title="Edit Product">
@@ -131,7 +136,7 @@ const EditProduct = () => {
               name="status"
               type="switch"
               label="Status"
-              checked={form.status === "active"}
+              checked={form?.status === "active"}
               onChange={handleOnChange}
             />
           </Form.Group>
@@ -144,6 +149,35 @@ const EditProduct = () => {
               handleOnChange={handleOnChange}
             />
           ))}
+          <div className="py-5 d-flex justify-content-between flex-wrap gap-4">
+            {form?.images?.map((url) => (
+              <div className="d-flex flex-column">
+                <div>
+                  <input
+                    type="radio"
+                    name="thumbnail"
+                    checked={url === form.thumbnail}
+                    value={url}
+                    onChange={handleOnChange}
+                  />
+                  <br />
+                  <label>Thumbnail</label>
+                </div>
+                <img
+                  src={process.env.REACT_APP_ROOTAPI + url?.slice(10)}
+                  style={{ width: "250px" }}
+                />
+                <div>
+                  <Form.Check
+                    label="Delete"
+                    value={url}
+                    onChange={handleSelectedDelete}
+                    checked={selectedDelete.includes(url)}
+                  />
+                </div>
+              </div>
+            ))}
+          </div>
           <Form.Group>
             <Form.Control
               type="file"
@@ -152,7 +186,13 @@ const EditProduct = () => {
               onChange={handleOnImageAttached}
             />
           </Form.Group>
-          <Button type="submit">Edit Product</Button>
+          <Button type="submit" variant="primary" className="w-100">
+            Edit Product
+          </Button>
+          <br />
+          <Button variant="danger" className="w-100">
+            Delete Product
+          </Button>
         </Form>
       </div>
     </AdminLayout>
