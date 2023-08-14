@@ -246,3 +246,13 @@ export const reqOTPAxios = async (email) => {
 
   return await axiosProcessor(obj);
 };
+export const resetPassAxios = async (data) => {
+  console.log("axios reset pass: ", data);
+  const obj = {
+    method: "post",
+    url: userAPI + "/reset-pass",
+    obj: data,
+  };
+
+  return await axiosProcessor(obj);
+};

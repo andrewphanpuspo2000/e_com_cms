@@ -109,7 +109,11 @@ const EditProduct = () => {
   };
 
   const handleSelectedDelete = (e) => {
-    const { name, value } = e.target;
+    const { value, checked } = e.target;
+    if (value === form.thumbnail) return alert("You can not delete thumbnail");
+    checked
+      ? setSelectedDelete([...selectedDelete, value])
+      : setSelectedDelete(selectedDelete.filter((url) => url !== value));
   };
 
   const handleOnImageAttached = (e) => {
@@ -125,7 +129,7 @@ const EditProduct = () => {
   useEffect(() => {
     dispatch(getAllCategoriesAction());
     getProductWithId(id);
-    // console.log(form);
+    // console.log(selectedDelete);
   }, [dispatch, id]);
   return (
     <AdminLayout title="Edit Product">
@@ -186,11 +190,11 @@ const EditProduct = () => {
               onChange={handleOnImageAttached}
             />
           </Form.Group>
-          <Button type="submit" variant="primary" className="w-100">
+          <Button type="submit" variant="primary" className="w-100 mt-5">
             Edit Product
           </Button>
           <br />
-          <Button variant="danger" className="w-100">
+          <Button variant="danger" className="w-100 mt-4">
             Delete Product
           </Button>
         </Form>

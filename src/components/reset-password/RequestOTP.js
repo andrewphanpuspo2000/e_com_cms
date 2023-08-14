@@ -3,7 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../user-input/CustomInput";
 import { reqOTPAction } from "../admin-signup/adminAction";
 
-const RequestOTP = ({ setForm }) => {
+const RequestOTP = ({ setForm, setEmail }) => {
   const emailRef = useRef();
   const handleSendOTP = async () => {
     const { value } = emailRef.current;
@@ -13,11 +13,12 @@ const RequestOTP = ({ setForm }) => {
 
       if (result === "success") {
         setForm("password");
+        setEmail(value);
       }
     }
   };
   return (
-    <Form className="border p-4 shadow-lg">
+    <Form>
       <h3>Request OTP</h3>
       <hr />
       <CustomInput

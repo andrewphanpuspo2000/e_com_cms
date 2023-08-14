@@ -6,6 +6,7 @@ import {
   newRefresherAxios,
   postNewAdmin,
   reqOTPAxios,
+  resetPassAxios,
 } from "../../helper/axios";
 import { setUser } from "../admin-signin/adminSlice";
 
@@ -79,4 +80,14 @@ export const reqOTPAction = async (email) => {
   const { status, message } = await pending;
   toast[status](message);
   return status;
+};
+
+export const resetPassAction = async (data) => {
+  console.log(data);
+  const { status, message } = await resetPassAxios(data);
+  toast[status](message);
+
+  if (status === "success") {
+    return status;
+  }
 };
