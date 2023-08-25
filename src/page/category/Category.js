@@ -14,9 +14,8 @@ import { setSystem } from "../../components/modal/modalSlice";
 export const Category = () => {
   const inputs = [
     {
-      fieldName: "Title",
       name: "title",
-      placeholder: "Input title",
+      placeholder: "Input Category",
       required: true,
     },
   ];
@@ -45,7 +44,7 @@ export const Category = () => {
   return (
     <AdminLayout title="Category">
       <Container>
-        <Form className="p-3  shadow-lg" onSubmit={handleOnSubmit}>
+        <Form className="p-3  shadow-lg " onSubmit={handleOnSubmit}>
           <Row>
             <Col>
               {inputs.map((item, i) => (
@@ -57,7 +56,7 @@ export const Category = () => {
               ))}
             </Col>
             <Col>
-              <Button type="submit" className="w-100">
+              <Button type="submit" className="w-100 mt-4">
                 Add new category
               </Button>
             </Col>

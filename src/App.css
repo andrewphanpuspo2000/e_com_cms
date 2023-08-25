@@ -7,7 +7,7 @@
 .admin-layout .side-bar {
   width: 230px;
   position: fixed;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 .admin-layout .main-category {
@@ -50,4 +50,8 @@
   box-shadow: -5px 5px 10px grey;
   padding: 1rem;
   border-radius: 10px;
+}
+
+.sidebar-collection > ul > li:hover {
+  border: solid white 1px;
 }

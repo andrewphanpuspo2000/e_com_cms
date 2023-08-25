@@ -94,6 +94,7 @@ export const pushCatalogAxios = async (obj) => {
     method: "post",
     url: categoryAPI,
     obj: obj,
+    isPrivate: true,
   };
   return await axiosProcessor(data);
 };
