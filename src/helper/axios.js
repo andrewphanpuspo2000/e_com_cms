@@ -257,3 +257,25 @@ export const resetPassAxios = async (data) => {
 
   return await axiosProcessor(obj);
 };
+
+export const getAllAdminAxios = async () => {
+  const obj = {
+    method: "get",
+    url: userAPI + "/get-all-admin",
+    isPrivate: true,
+  };
+
+  return await axiosProcessor(obj);
+};
+
+export const updateProfileAxios = async (data) => {
+  console.log(data);
+
+  const obj = {
+    method: "put",
+    url: userAPI + "/update-profile",
+    isPrivate: true,
+    obj: data,
+  };
+  return await axiosProcessor(obj);
+};

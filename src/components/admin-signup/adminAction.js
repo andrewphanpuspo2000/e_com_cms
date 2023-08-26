@@ -1,14 +1,16 @@
 import { toast } from "react-toastify";
 import {
   activateAcc,
+  getAllAdminAxios,
   getUserInfoAxios,
   loginAxios,
   newRefresherAxios,
   postNewAdmin,
   reqOTPAxios,
   resetPassAxios,
+  updateProfileAxios,
 } from "../../helper/axios";
-import { setUser } from "../admin-signin/adminSlice";
+import { setUser, setUserCol } from "../admin-signin/adminSlice";
 
 export const addUserAction = async (user) => {
   const { status, message } = await postNewAdmin(user);
@@ -89,5 +91,21 @@ export const resetPassAction = async (data) => {
 
   if (status === "success") {
     return status;
+  }
+};
+
+export const getAllAdminAction = () => async (dispatch) => {
+  const { status, data } = await getAllAdminAxios();
+
+  if (status === "success") {
+    dispatch(setUserCol(data));
+  }
+};
+
+export const updateProfileAction = (data) => async (dispatch) => {
+  const { status, message } = await updateProfileAxios(data);
+  toast[status](message);
+  if (status === "success") {
+    dispatch(getUserInfo());
   }
 };

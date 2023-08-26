@@ -21,6 +21,7 @@ import PrivateRouter from "./components/private/PrivateRouter";
 import NewProduct from "./page/product/NewProduct";
 import EditProduct from "./page/product/EditProduct";
 import ResetPassword from "./page/resetPassword/ResetPassword";
+import EditProfile from "./page/profile/EditProfile";
 
 function App() {
   const dispatch = useDispatch();
@@ -111,6 +112,14 @@ function App() {
           element={
             <PrivateRouter>
               <Profile />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/edit-profile"
+          element={
+            <PrivateRouter>
+              <EditProfile />
             </PrivateRouter>
           }
         />

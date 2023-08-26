@@ -7,6 +7,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutAxios } from "../../helper/axios";
 import { setUser } from "../admin-signin/adminSlice";
+import { BiSolidUser } from "react-icons/bi";
 
 export const Header = () => {
   const dispatch = useDispatch();
@@ -47,6 +48,29 @@ export const Header = () => {
                   <Link className="nav-link" to="/" onClick={signOut}>
                     Sign Out
                   </Link>
+                  {!user?.image?.length ? (
+                    <div
+                      style={{ fontSize: "20px", color: "black" }}
+                      className="nav-link p-2 bg-light rounded-circle"
+                    >
+                      <BiSolidUser />
+                    </div>
+                  ) : (
+                    <div
+                      style={{
+                        width: "70px",
+                        height: "70px",
+                      }}
+                      className="rounded-circle"
+                    >
+                      <img
+                        src={
+                          process.env.REACT_APP_ROOTAPI + user?.image?.slice(10)
+                        }
+                        className="w-100 h-100 rounded-circle"
+                      />
+                    </div>
+                  )}
                 </>
               )}
             </Nav>

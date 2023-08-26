@@ -26,7 +26,7 @@ export const Payment = () => {
   return (
     <AdminLayout title="Payment">
       <Container>
-        <Button className="w-100" onClick={handleOnAdd}>
+        <Button className="w-100" variant="dark" onClick={handleOnAdd}>
           Add Payment Method
         </Button>
         <CustomModal modalTitle="Payment Option">
