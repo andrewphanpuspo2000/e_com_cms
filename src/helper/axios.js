@@ -279,3 +279,13 @@ export const updateProfileAxios = async (data) => {
   };
   return await axiosProcessor(obj);
 };
+
+export const newPasswordAxios = async (data) => {
+  const obj = {
+    method: "patch",
+    url: userAPI + "/new-password",
+    isPrivate: true,
+    obj: data,
+  };
+  return await axiosProcessor(obj);
+};

@@ -41,9 +41,12 @@ export const Profile = () => {
             <h1>{user.fName}</h1>
             <h6>{user.email}</h6>
           </div>
-          <div style={{ position: "absolute", right: "1rem", bottom: "1rem" }}>
+          <div style={{ position: "absolute", right: "2rem", bottom: "2rem" }}>
             <Link to={`/edit-profile`}>
-              <Button>Edit Profile</Button>
+              <Button variant="dark">Edit Profile</Button>
+            </Link>
+            <Link to={`/new-password`}>
+              <Button variant="dark">New Password</Button>
             </Link>
           </div>
         </div>

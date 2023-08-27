@@ -2,9 +2,8 @@ import React, { useEffect, useState } from "react";
 import { AdminLayout } from "../../components/adminLayout/AdminLayout";
 import { Button, Form } from "react-bootstrap";
 import { CustomInput } from "../../components/user-input/CustomInput";
-import { useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { updateProductAction } from "../../components/product/productAction";
 import { updateProfileAction } from "../../components/admin-signup/adminAction";
 
 const EditProfile = () => {
@@ -84,7 +83,13 @@ const EditProfile = () => {
   };
   return (
     <AdminLayout title="Edit Profile">
-      <Form onSubmit={handleOnSubmit}>
+      <Link to="/profile">
+        <Button variant="dark">
+          <i class="fa-solid fa-arrow-left"></i>
+          Back to Profile
+        </Button>
+      </Link>
+      <Form onSubmit={handleOnSubmit} className="mt-3">
         <div style={{ width: "150px", height: "150px" }}>
           <img
             className="w-100 h-100"

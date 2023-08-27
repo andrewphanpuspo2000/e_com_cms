@@ -22,6 +22,7 @@ import NewProduct from "./page/product/NewProduct";
 import EditProduct from "./page/product/EditProduct";
 import ResetPassword from "./page/resetPassword/ResetPassword";
 import EditProfile from "./page/profile/EditProfile";
+import { NewPassword } from "./page/profile/NewPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -120,6 +121,14 @@ function App() {
           element={
             <PrivateRouter>
               <EditProfile />
+            </PrivateRouter>
+          }
+        />
+        <Route
+          path="/new-password"
+          element={
+            <PrivateRouter>
+              <NewPassword />
             </PrivateRouter>
           }
         />

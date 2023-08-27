@@ -4,6 +4,7 @@ import {
   getAllAdminAxios,
   getUserInfoAxios,
   loginAxios,
+  newPasswordAxios,
   newRefresherAxios,
   postNewAdmin,
   reqOTPAxios,
@@ -108,4 +109,10 @@ export const updateProfileAction = (data) => async (dispatch) => {
   if (status === "success") {
     dispatch(getUserInfo());
   }
+};
+
+export const newPasswordAction = async (data) => {
+  const { status, message } = await newPasswordAxios(data);
+
+  status === "success" ? toast[status](message) : toast.error(message);
 };
