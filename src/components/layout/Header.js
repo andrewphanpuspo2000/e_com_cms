@@ -41,7 +41,7 @@ export const Header = () => {
                   </Link>
                 </>
               ) : (
-                <>
+                <div className="d-flex align-items-center">
                   <Link className="nav-link" to="/dashboard">
                     Dashboard
                   </Link>
@@ -58,8 +58,8 @@ export const Header = () => {
                   ) : (
                     <div
                       style={{
-                        width: "70px",
-                        height: "70px",
+                        width: "60px",
+                        height: "60px",
                       }}
                       className="rounded-circle"
                     >
@@ -71,7 +71,7 @@ export const Header = () => {
                       />
                     </div>
                   )}
-                </>
+                </div>
               )}
             </Nav>
           </Navbar.Collapse>

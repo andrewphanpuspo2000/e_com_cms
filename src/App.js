@@ -25,8 +25,6 @@ import EditProfile from "./page/profile/EditProfile";
 import { NewPassword } from "./page/profile/NewPassword";
 
 function App() {
-  const dispatch = useDispatch();
-
   return (
     <div className="">
       <Routes>
