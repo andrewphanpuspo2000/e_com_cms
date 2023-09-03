@@ -43,10 +43,10 @@ export const verifyUser = (obj) => async (dispatch) => {
   const result = await pending;
   toast[result?.status](result?.message);
 
-  if (result?.status === "success") {
-    dispatch(setUser(result?.user));
-    return result;
-  }
+  // if (result?.status === "success") {
+  //   dispatch(setUser(result?.user));
+  //   return result;
+  // }
 };
 
 export const getUserInfo = () => async (dispatch) => {

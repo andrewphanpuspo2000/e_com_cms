@@ -24,15 +24,25 @@ export const Category = () => {
   const { category } = useSelector((state) => state.categoryData);
   const dispatch = useDispatch();
   const [selectedTable, setSelectedTable] = useState({});
-
+  const [img, setImg] = useState({});
   const handleOnChange = (e) => {
     const { name, value } = e.target;
     setForm({ ...form, [name]: value });
   };
-
+  const handleImage = (e) => {
+    const { files } = e.target;
+    setImg(files);
+  };
   const handleOnSubmit = (e) => {
     e.preventDefault();
-    dispatch(sendCategoryAction(form));
+    const formData = new FormData();
+    for (let key in form) {
+      formData.append(key, form[key]);
+    }
+    if (img?.length) {
+      formData.append("image", img[0]);
+    }
+    dispatch(sendCategoryAction(formData));
   };
   const handleOnEdit = (obj) => {
     dispatch(setSystem(true));
@@ -40,7 +50,8 @@ export const Category = () => {
   };
   useEffect(() => {
     dispatch(getAllCategoriesAction());
-  }, [dispatch]);
+    console.log(img);
+  }, [dispatch, img]);
   return (
     <AdminLayout title="Category">
       <Container>
@@ -54,6 +65,12 @@ export const Category = () => {
                   handleOnChange={handleOnChange}
                 />
               ))}
+            </Col>
+            <Col>
+              <Form.Group className="mb-3">
+                <Form.Label>Thumbnail</Form.Label>
+                <Form.Control type="file" onChange={handleImage} />
+              </Form.Group>
             </Col>
             <Col>
               <Button type="submit" className="w-100 mt-4">
