@@ -5,7 +5,7 @@ import { verifyUser } from "../../components/admin-signup/adminAction";
 import { useState } from "react";
 import Spinner from "react-bootstrap/Spinner";
 import { Header } from "../../components/layout/Header";
-
+import React from "react";
 export const Verification = () => {
   const [searchParam] = useSearchParams();
   const getC = searchParam.get("c");
@@ -18,7 +18,7 @@ export const Verification = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     setShowSpinner(true);
-    const result = await dispatch(verifyUser({ email: getE, code: getC }));
+    const result = await verifyUser({ email: getE, code: getC });
     if (result?.status === "success") {
       navigate("/");
     } else {
@@ -26,7 +26,7 @@ export const Verification = () => {
     }
   };
   return (
-    <>
+    <React.Fragment>
       <Header />
       <div className="bg-secondary text-light w-50 text-center p-5 mt-5 m-auto">
         {!showSpinner ? (
@@ -41,6 +41,6 @@ export const Verification = () => {
           </Spinner>
         )}
       </div>
-    </>
+    </React.Fragment>
   );
 };

@@ -35,7 +35,7 @@ export const loginAction = (info) => async (dispatch) => {
   //get the user data and mount it
 };
 
-export const verifyUser = (obj) => async (dispatch) => {
+export const verifyUser = async (obj) => {
   const pending = activateAcc(obj);
   toast.promise(pending, {
     pending: "pending....",
@@ -43,15 +43,14 @@ export const verifyUser = (obj) => async (dispatch) => {
   const result = await pending;
   toast[result?.status](result?.message);
 
-  // if (result?.status === "success") {
-  //   dispatch(setUser(result?.user));
-  //   return result;
-  // }
+  if (result?.status === "success") {
+    return result;
+  }
 };
 
 export const getUserInfo = () => async (dispatch) => {
   const { status, message, user } = await getUserInfoAxios();
-  // toast[status](message);
+  toast[status](message);
   if (status === "success") {
     dispatch(setUser(user));
   }
